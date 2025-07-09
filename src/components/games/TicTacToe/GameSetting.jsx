@@ -13,7 +13,7 @@ const GameSettings = () => {
 
   return (
     <div
-      className="relative flex  flex-col bg-slate-50 overflow-x-hidden"
+      className="relative flex flex-1 flex-col bg-gray-50 overflow-x-hidden"
       style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
     >
       <div className="px-40 flex flex-1 justify-center py-5">

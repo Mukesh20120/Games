@@ -85,7 +85,6 @@ export function findBestMove(board = [], diff, player, bot) {
   } else if (diff === "Hard") {
     depth = 9;
   }
- 
   let bestScore = -Infinity;
   let bestIndex = -1;
 

@@ -9,7 +9,7 @@ const Home = () => {
   ];
 
    return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] px-4">
+    <div className="flex flex-col w-full items-center justify-center min-h-[80vh] px-4">
       <h1 className="text-4xl font-bold mb-8 text-blue-700">🎮 Game Hub</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-xl">
         {games.map((game) => (

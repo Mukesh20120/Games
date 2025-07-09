@@ -84,7 +84,7 @@ export default function TicTacToe() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-full bg-slate-50 p-6">
+    <div className="flex flex-col justify-center items-center w-full  bg-slate-50 p-6">
       <div className="text-center mb-6 min-h-[48px] flex items-center justify-center">
         <h1 className={`text-2xl font-bold ${statusClass}`}>{statusMessage}</h1>
       </div>
