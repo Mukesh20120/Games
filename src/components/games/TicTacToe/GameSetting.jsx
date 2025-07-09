@@ -16,7 +16,7 @@ const GameSettings = () => {
       className="relative flex flex-1 flex-col bg-gray-50 overflow-x-hidden"
       style={{ fontFamily: '"Spline Sans", "Noto Sans", sans-serif' }}
     >
-      <div className="px-40 flex flex-1 justify-center py-5">
+      <div className="px-40 flex flex-1 justify-center ">
         <div className="flex flex-col w-[512px] max-w-[512px] py-5 flex-1">
           <h2 className="text-[28px] font-bold text-center pb-3 pt-5">
             Game Mode

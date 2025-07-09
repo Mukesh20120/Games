@@ -200,9 +200,6 @@ return (
 
     {/* Right content area */}
     <div className="flex flex-col items-center justify-center flex-1 gap-6 overflow-auto">
-      <h1 className="text-2xl md:text-3xl font-bold text-indigo-700 drop-shadow-sm">
-        Sudoku Board
-      </h1>
 
       {/* Sudoku Board */}
       <div className="p-2 md:p-3 bg-white shadow-lg border border-gray-300 overflow-auto max-w-full">
