@@ -144,71 +144,43 @@ export default function Sudoku() {
   };
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-indigo-700 drop-shadow-sm">
-        Sudoku Board
-      </h1>
+    <div className="flex bg-gray-100 overflow-hidden">
+      {/* Left control panel */}
+      <div className="flex flex-col gap-4 p-6 bg-white shadow-md border-r border-gray-200 w-64">
+        <h2 className="text-2xl font-bold text-indigo-700">Controls</h2>
 
-      <div className="p-3 bg-white shadow-lg border border-gray-300">
-        {sudokuBoard.map((row, ri) => (
-          <div key={ri} className="flex">
-            {row.map((col, ci) => (
-              <div
-                key={ci}
-                onMouseOver={() => {
-                  if (!isSolving) setCurrentCoords({ x: ri, y: ci });
-                }}
-                onClick={() => {
-                  if (!isSolving) setSelectedCoords({ x: ri, y: ci });
-                }}
-                className={`${getCellClassNames(ri, ci)} ${
-                  isSolving ? "cursor-not-allowed opacity-60" : "cursor-pointer"
-                }`}
-              >
-                {col.value || ""}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap gap-3">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, "x"].map((val, idx) => (
-          <button
-            key={idx}
-            disabled={isSolving}
-            onClick={() => handleValueClick(val)}
-            className={`px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-800 font-medium transition-all shadow-sm
-      ${
-        isSolving
-          ? "cursor-not-allowed opacity-60"
-          : "hover:bg-indigo-500 hover:text-white"
-      }
-    `}
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">
+            Difficulty:
+          </label>
+          <select
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            className="w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
           >
-            {val}
-          </button>
-        ))}
-      </div>
-      <div className="flex gap-2">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
         <button
           disabled={isSolving}
           onClick={handleResetBoard}
-          className={`mt-4 px-5 py-2 rounded-md bg-red-500 text-white font-medium transition-all shadow-sm
-    ${isSolving ? "cursor-not-allowed opacity-60" : "hover:bg-red-600"}
-  `}
+          className={`px-5 py-2 rounded-md bg-red-500 text-white font-medium transition-all shadow-sm 
+        ${isSolving ? "cursor-not-allowed opacity-60" : "hover:bg-red-600"}
+      `}
         >
-          Reset Board
+          Reset
         </button>
 
         <button
           disabled={isSolving}
-          onClick={() => {
-            setSudokuBoard(generateSudokuPuzzle(difficulty));
-          }}
-          className={`mt-4 px-5 py-2 rounded-md bg-blue-500 text-white font-medium transition-all shadow-sm
-    ${isSolving ? "cursor-not-allowed opacity-60" : "hover:bg-blue-600"}
-  `}
+          onClick={() => setSudokuBoard(generateSudokuPuzzle(difficulty))}
+          className={`px-5 py-2 rounded-md bg-blue-500 text-white font-medium transition-all shadow-sm 
+        ${isSolving ? "cursor-not-allowed opacity-60" : "hover:bg-blue-600"}
+      `}
         >
           Random Fill
         </button>
@@ -217,28 +189,67 @@ export default function Sudoku() {
           disabled={isSolving}
           onClick={async () => {
             setIsSolving(true);
-            await new Promise((resolve) => setTimeout(resolve, 0)); // allow render
+            await new Promise((resolve) => setTimeout(resolve, 0));
             await solveSudoku(sudokuBoard);
             setIsSolving(false);
           }}
-          className="mt-4 px-5 py-2 rounded-md bg-green-500 text-white font-medium hover:bg-green-600 transition-all shadow-sm 
-    cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+          className="px-5 py-2 rounded-md bg-green-500 text-white font-medium hover:bg-green-600 transition-all shadow-sm 
+        cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSolving ? "Solving..." : "Solve"}
         </button>
+      </div>
 
-        <div className="flex gap-2 items-center mt-4">
-          <label className="font-medium text-gray-700">Difficulty:</label>
-          <select
-            value={difficulty}
-            onChange={(e) => setDifficulty(e.target.value)}
-            className="px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-          >
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-            <option value="expert">Expert</option>
-          </select>
+      {/* Right content area */}
+      <div className="flex flex-col items-center justify-center flex-1 gap-6">
+        <h1 className="text-3xl font-bold text-indigo-700 drop-shadow-sm">
+          Sudoku Board
+        </h1>
+
+        {/* Sudoku Board */}
+        <div className="p-3 bg-white shadow-lg border border-gray-300">
+          {sudokuBoard.map((row, ri) => (
+            <div key={ri} className="flex">
+              {row.map((col, ci) => (
+                <div
+                  key={ci}
+                  onMouseOver={() => {
+                    if (!isSolving) setCurrentCoords({ x: ri, y: ci });
+                  }}
+                  onClick={() => {
+                    if (!isSolving) setSelectedCoords({ x: ri, y: ci });
+                  }}
+                  className={`${getCellClassNames(ri, ci)} ${
+                    isSolving
+                      ? "cursor-not-allowed opacity-60"
+                      : "cursor-pointer"
+                  }`}
+                >
+                  {col.value || ""}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Number Buttons */}
+        <div className="flex flex-wrap gap-3">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, "x"].map((val, idx) => (
+            <button
+              key={idx}
+              disabled={isSolving}
+              onClick={() => handleValueClick(val)}
+              className={`px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-800 font-medium transition-all shadow-sm
+            ${
+              isSolving
+                ? "cursor-not-allowed opacity-60"
+                : "hover:bg-indigo-500 hover:text-white"
+            }
+          `}
+            >
+              {val}
+            </button>
+          ))}
         </div>
       </div>
     </div>
